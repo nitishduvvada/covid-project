@@ -8,7 +8,7 @@ Skills used: Joins, CTE's, Temp Tables, Windows Functions, Aggregate Functions, 
 Select *
 From PortfolioProject..CovidDeaths
 Where continent is not null 
-order by 3,4
+
 
 
 -- Select Data that we are going to be starting with
@@ -78,21 +78,5 @@ From PortfolioProject..CovidDeaths
 --Where location like '%states%'
 where continent is not null 
 --Group By date
-order by 1,2
-
-
-
--- Total Population vs Vaccinations
--- Shows Percentage of Population that has recieved at least one Covid Vaccine
-
-Select dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinations
-, SUM(CONVERT(int,vac.new_vaccinations)) OVER (Partition by dea.Location Order by dea.location, dea.Date) as RollingPeopleVaccinated
---, (RollingPeopleVaccinated/population)*100
-From PortfolioProject..CovidDeaths dea
-Join PortfolioProject..CovidVaccinations vac
-	On dea.location = vac.location
-	and dea.date = vac.date
-where dea.continent is not null 
-order by 2,3
 
 
